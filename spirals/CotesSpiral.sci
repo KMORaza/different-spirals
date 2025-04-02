@@ -1,0 +1,43 @@
+//clc;
+//clear;
+k = 1;        
+theta = linspace(0, 10*%pi, 1000);  
+// p^2 < k
+p1 = 0.8*sqrt(k);
+r1 = 1 ./ (p1*cosh(k*theta - p1*theta));
+// p^2 = k 
+p2 = sqrt(k);
+r2 = 1 ./ (1 + p2*theta);
+// p^2 > k
+p3 = 1.2*sqrt(k);
+r3 = 1 ./ (p3*cos(p3*theta - k*theta));
+x1 = r1 .* cos(theta);
+y1 = r1 .* sin(theta);
+x2 = r2 .* cos(theta);
+y2 = r2 .* sin(theta);
+x3 = r3 .* cos(theta);
+y3 = r3 .* sin(theta);
+scf(0);
+clf();
+subplot(1,3,1);
+plot(x1, y1, 'b', 'LineWidth', 2);
+title('Case 1: p² < k (Elliptic)', 'fontsize', 3);
+xlabel('x'); ylabel('y');
+a1 = gca();
+a1.isoview = "on";
+a1.data_bounds = [-1,-1;1,1];
+subplot(1,3,2);
+plot(x2, y2, 'r', 'LineWidth', 2);
+title('Case 2: p² = k (Parabolic)', 'fontsize', 3);
+xlabel('x'); ylabel('y');
+a2 = gca();
+a2.isoview = "on";
+a2.data_bounds = [-1,-1;1,1];
+subplot(1,3,3);
+plot(x3, y3, 'g', 'LineWidth', 2);
+title('Case 3: p² > k (Hyperbolic)', 'fontsize', 3);
+xlabel('x'); ylabel('y');
+a3 = gca();
+a3.isoview = "on";
+a3.data_bounds = [-1,-1;1,1];
+suptitle("Cotes''s Spirals (Three Cases)");

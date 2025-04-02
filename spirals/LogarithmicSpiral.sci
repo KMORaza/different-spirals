@@ -1,0 +1,32 @@
+// r = a*e^(b*θ)
+// clear; clc; clf;
+a = 1;            
+b = 0.2;          
+theta_min = 0;   
+theta_max = 6*%pi;
+n_points = 1000;   
+theta = linspace(theta_min, theta_max, n_points);
+r = a * exp(b * theta);
+x = r .* cos(theta);
+y = r .* sin(theta);
+f = scf(0);
+f.background = color("white");
+f.figure_name = "Logarithmic Spiral (Equiangular Spiral)";
+plot(x, y, 'color', [0.83 0.67 0.22], 'LineWidth', 3);
+title("$\Large\textbf{Logarithmic Spiral}\ (r = ae^{b\theta})$", "fontsize", 5);
+xlabel("x", "fontsize", 4);
+ylabel("y", "fontsize", 4);
+ax = gca();
+ax.isoview = "on";      
+ax.grid = [1, 1];        
+ax.grid_style = [7,7];   
+ax.font_size = 3;
+plot(a, 0, 'ko', 'MarkerSize', 8, 'MarkerFaceColor', 'k');  
+xstring(x(300), y(300), sprintf("Growth rate: b = %.2f", b), 0);
+theta_mark = %pi/2;
+r_mark = a * exp(b * theta_mark);
+plot([0 r_mark*cos(theta_mark)], [0 r_mark*sin(theta_mark)], 'r--');
+xstring(r_mark*cos(theta_mark)/2, r_mark*sin(theta_mark)/2, ...
+        sprintf("Constant angle: %.1f°", atand(1/b)));
+plot([2*a 3*a], [-2*a -2*a], 'k-', 'LineWidth', 2);
+xstring(2.5*a, -2.3*a, "Scale Reference");
